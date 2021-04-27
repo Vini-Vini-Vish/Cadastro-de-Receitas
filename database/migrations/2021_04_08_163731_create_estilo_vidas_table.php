@@ -16,7 +16,12 @@ class CreateEstiloVidasTable extends Migration
         Schema::create('estilo_vidas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('titulo', 60);
-            $table->string('descricao', 250);        
+            $table->string('descricao', 250);    
+            
+            //chave estrangeira de cadastros 
+            $table->Integer ('cadastro_id')->unsigned();
+            $table->foreign ('cadastro_id')->references('id')->on('cadastros')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
