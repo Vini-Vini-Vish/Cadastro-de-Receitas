@@ -21,6 +21,11 @@ class CreateReceitasTable extends Migration
             $table->string('rendimento', 20);
             $table->string('lista_ingredientes', 250);
             $table->string('metodo_preparo', 250);
+            
+            //chave estrangeira de cadastros 
+            $table->Integer ('cadastro_id')->unsigned();
+            $table->foreign ('cadastro_id')->references('id')->on('cadastros')->onDelete('cascade');
+
             $table->timestamps();
         });
     }
