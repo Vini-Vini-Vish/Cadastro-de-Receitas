@@ -19,7 +19,12 @@ class CreateLivrosTable extends Migration
             $table->string('descricao', 150);
             $table->string('editora', 50);
             $table->integer('ano_publicacao');
-            $table->string('autor', 50);            
+            $table->string('autor', 50);   
+            
+            //chave estrangeira de cadastros 
+            $table->Integer ('cadastro_id')->unsigned();
+            $table->foreign ('cadastro_id')->references('id')->on('cadastros')->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
