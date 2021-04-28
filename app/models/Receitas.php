@@ -21,6 +21,12 @@ class Receitas extends Model
         'metodo_preparo',
     ];    
 
+    //função de relacionamento com cadastro sendo (1 cadastro para muitas receitas)
+    public function cadastro()
+    {
+        return $this->belongsTo('App\models\Cadastro','cadastro_id');
+    }
+
     public function search($filter = null)
     {
 
