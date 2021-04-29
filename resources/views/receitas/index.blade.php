@@ -41,18 +41,20 @@
                         <thead class="cf">
                             <tr>
                                 <th>Id</th>
+                                <th>Autor da Receita</th>
                                 <th>Nome da Receita</th>
                                 <th>Descrição </th>
                                 <th>Tempo de Preparo</th>
                                 <th>Rendimento</th>
                                 <th>Lista de Ingredientes</th>
-                                <th>Método de Preparo</th>
+                                <th>Método de Preparo</th>                                
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($registros as $registro)
                                 <tr>
                                     <td>{{$registro->id}}</td>
+                                    <td>{{$registros->cadastro->nome}}</td>
                                     <td>{{$registro->nome_receita}}</td>
                                     <td>{{$registro->descricao}}</td>
                                     <td>{{$registro->tempo_preparo}}</td>
