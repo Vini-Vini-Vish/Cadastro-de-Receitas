@@ -6,7 +6,12 @@
                 name="nome" 
                 id="nome" 
                 value="{{ isset( $registro->nome ) ? $registro->nome : '' }}"
-                class="form-control">
+                class="form-control @error('nome') is-invalid @enderror" />
+                @error('nome_receita')
+                    <div>
+                        <span><strong>{{ $message }}</strong></span>
+                    </div>                    
+                @enderror
         </div>       
     </div>
 </div>
