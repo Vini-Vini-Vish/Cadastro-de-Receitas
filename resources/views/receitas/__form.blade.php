@@ -92,6 +92,24 @@
 <div class="row">
     <div class="col-xs-12 col-sm-6 col-sm-6 col-lg-12">
         <div class="form-group">
+            <label for="cadastro_id" class="control-label">Autor da Receita:</label>
+            <select type="text" name="cadastro_id" id="cadastro_id"> 
+                @foreach ($cadastros as $cadastro)
+                    <option value="{{$cadastro->id}}">{{cadastro->nome}}</option>                    
+                @endforeach
+            </select>      
+            @error('cadastro_id')
+            <div>
+                <span><strong>{{ $message }}</strong></span>
+            </div>                    
+        @enderror        
+        </div>       
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-sm-6 col-lg-12">
+        <div class="form-group">
             <label for="metodo_preparo" class="control-label">Metodo de Preparo:</label>
             <input type="text" 
                 name="metodo_preparo" 
