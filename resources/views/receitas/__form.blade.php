@@ -95,7 +95,7 @@
             <label for="cadastro_id" class="control-label">Autor da Receita:</label>
             <select type="text" name="cadastro_id" id="cadastro_id"> 
                 @foreach ($cadastros as $cadastro)
-                    <option value="{{$cadastro->id}}">{{cadastro->nome}}</option>                    
+                    <option value="{{$cadastro->id}}">{{$cadastro->nome}}</option>                    
                 @endforeach
             </select>      
             @error('cadastro_id')
