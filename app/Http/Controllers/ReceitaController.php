@@ -131,11 +131,5 @@ class ReceitaController extends Controller
     public function cancel()
     {
         return redirect()->route('receitas.listar');
-    }
-
-    
-
-    
-
-    
+    }       
 }
