@@ -20,6 +20,6 @@ class Cadastro extends Model
     //função de relacionamento com receitas sendo (1 cadastro para muitas receitas)
     public function receitas()
     {
-        return $this->hasMany('App\models\Receitas', 'cadastro_id')
+        return $this->hasMany('App\models\Receitas', 'cadastro_id');
     }
 }
