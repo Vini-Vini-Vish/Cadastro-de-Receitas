@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Receitas;
+use App\Models\Cadastro;
 use Illuminate\Http\Request;
 use Illuminate\Cache\Repository;
 use App\http\Requests\ReceitaRequest;
@@ -46,7 +47,12 @@ class ReceitaController extends Controller
     //retorna a pagina para cadastrar um novo usuario
     public function new()
     {
-        return view('receitas.incluir');
+        $cadastros = Cadastro::all();
+
+        return view('receitas.incluir',
+        [
+            'cadastros'=>$cadastros,            
+        ]);
     }
 
     //salvar o registro de um novo usuario
@@ -62,6 +68,7 @@ class ReceitaController extends Controller
     //retorna o registro de um usuario para alteração dos dados
     public function update( $id)
     {
+        $cadastros = Cadastro::all();
         $registro = $this->repository->find($id);
 
         if(!$registro)
@@ -71,6 +78,7 @@ class ReceitaController extends Controller
 
         return view('receitas.alterar', [
             'registro' => $registro,
+            'cadastros'=>$cadastros,   
         ]);
     }
 
@@ -88,6 +96,7 @@ class ReceitaController extends Controller
     //retorna o registro de um usuario para exclusão
     public function delete( $id)
     {
+        $cadastros = Cadastro::all();
         $registro = $this->repository->find($id);
 
         if(!$registro)
@@ -97,6 +106,7 @@ class ReceitaController extends Controller
 
         return view('receitas.excluir', [
             'registro' => $registro,
+            'cadastros'=>$cadastros,   
         ]);
     }
 
