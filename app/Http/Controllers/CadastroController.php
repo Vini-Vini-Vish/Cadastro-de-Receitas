@@ -19,9 +19,20 @@ class CadastroController extends Controller
     //retorna a pagina de listagem de usuarios    
     public function index(Request $request)
     {    
-        $registros = $this->repository->all();
+        $registros = $this->repository->paginate(15);
         return view('cadastro.index', [
             'registros' => $registros,
+        ]);
+    }
+
+    public function search(Request $request)
+    {
+        $filters = $request->all();
+        $registros = $this->repository->search($request->nome);
+
+        return view('cadastro.index', [
+            'registros' => $registros,
+            'filters' => $filters,
         ]);
     }
 
@@ -34,7 +45,9 @@ class CadastroController extends Controller
     //salvar o registro de um novo usuario
     public function create(Request $request)
     {
-        return view('cadastro.index');
+        $registro = $request->all();
+        $this->repository->create($registro);
+        return redirect()->route('cadastro.listar');
     }
 
     //retorna o registro de um usuario para alteração dos dados
@@ -83,15 +96,21 @@ class CadastroController extends Controller
     }
 
     //alterar o registro modificado
-    public function save(Request $request, $id)
+    public function save(UsuarioRequest $request, $id)
     {
-        return view('cadastro.listar');
+        $data = $request->all();
+
+        $registro = $this->repository->find($id);
+        
+        $registro->update($data);
     }
 
     //excluir o registro do usuario
     public function excluir(Request $request, $id)
     {
-        return view('cadastro.listar');
+        $registro = $this->repository->find($id);
+        $registro->delete();
+        return redirect()->route('cadastro.listar');
     }
 
     //cancela a operação do usario
