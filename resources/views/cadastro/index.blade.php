@@ -24,6 +24,7 @@
 
                         <thead class="cf">
                             <tr>
+                               <th>Foto</th>
                                <th>ID</th>
                                <th>Nome</th>
                                <th>Email</th> 
@@ -32,8 +33,11 @@
                         </thead>
 
                         <tbody>
-                            {{-- @foreach ($registros as $registro)
+                            @foreach ($registros as $registro)
                                 <tr>
+                                    <td>
+                                        <img scr = "{{url('/imagem',  $registro->profile_pic) }}" />
+                                    </td>
                                     <td>{{ $registro->id    }}</td>
                                     <td>{{ $registro->nome  }}</td>
                                     <td>{{ $registro->email }}</td>
@@ -43,7 +47,7 @@
                                         <a class="btn btn-warning btn-sm" href="{{ url('cadastro/consultar', $registro->id )}}"><i class="fa fa-address-book"></i></a>
                                     </td>
                                 </tr>                              
-                            @endforeach --}}
+                            @endforeach 
                         </tbody>
                         
                     </table>
