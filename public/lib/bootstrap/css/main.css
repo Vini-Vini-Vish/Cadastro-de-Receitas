@@ -16802,3 +16802,24 @@ be a descendant of the grid when it is being dragged.
   font-size: 14px;
   margin-top: 5px;
 }
+
+.avatar{
+  width: 70%;
+  display: block;
+  border-radius: 50%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.img-avatar{
+  margin:auto;
+  display: flex;
+  justify-content: center;
+  vertical-align: none;
+  padding: 2%;
+  border: 1px solid #dee2e6;
+  max-width: 20%;
+  height: auto;
+  border-radius:50%;
+}
+
