@@ -29,7 +29,9 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <div class="col-xs-4 col-sm-6 col-md-8">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -55,6 +57,7 @@
                 </div>
             </div>
         </div>
+   
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -65,7 +68,7 @@
                 </div>
             </div>
         </div>
-
+    
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -92,3 +95,32 @@
         </div>
     </div>
 </div>
+
+@section('javascript')
+
+    <script>
+         $("#fileInput").change(function(e)){
+             e.preventDefault();
+             enviarFoto(this)
+         });
+
+         $("#fileExcluir").click(function(e){
+             e.preventDefault();
+             excluirFoto(this);
+         });
+
+         //preparar um pacote
+         function enviarFoto(input){
+            sendToServer(input)
+         }
+
+         function sendToServer(input){
+             
+         }
+
+         function excluirFoto(e){
+
+         }
+    </script>
+   
+@endsection
