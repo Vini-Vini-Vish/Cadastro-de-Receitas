@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cadastro;
 use Illuminate\Http\Request;
+use App\Http\Requests\CadastroRequest;
 
 class CadastroController extends Controller
 {
@@ -46,6 +47,11 @@ class CadastroController extends Controller
     public function create(Request $request)
     {
         $registro = $request->all();
+
+        if (empty($registro['profile_pic'])){
+            $registro['profile_pic']='boy.png';
+        }
+
         $this->repository->create($registro);
         return redirect()->route('cadastro.listar');
     }
@@ -96,13 +102,14 @@ class CadastroController extends Controller
     }
 
     //alterar o registro modificado
-    public function save(UsuarioRequest $request, $id)
+    public function save(CadastroRequest $request, $id)
     {
         $data = $request->all();
 
         $registro = $this->repository->find($id);
         
         $registro->update($data);
+        return redirect()->route('cadastro.listar');
     }
 
     //excluir o registro do usuario
