@@ -111,11 +111,46 @@
 
          //preparar um pacote
          function enviarFoto(input){
-            sendToServer(input)
-         }
+            if(input.files && input.files[0]){
+                var reader = new FileReader();
+                var filename = $('#fileInput').val();
+                filename = filename.substring(filename.lastIndexOf('\\')+1);
+                reader.onload = function(e){
+                    $('#imageUpload').attr('src', e.target.result);
+                    $('#imageUpload').hide();
+                    $('#imageUpload').fadeIn(500);
+                }
+                reader.readAsDataURL(input.files[0])
+                sendToServer(input.files[0])
+            }
+        }
 
-         function sendToServer(input){
-             
+        function sendToServer(foto){
+            var formData = new FormData();
+            formData.append('image',foto);
+            formData.append('id',$('#id').val());
+            $.ajax({
+                url: "{{ url('/store') }}",
+                method: 'POST',
+                data:formData,
+                dataType:'JSON',
+                cache:false, 
+                contentType:false,
+                processData: false,
+                beforeSend: function(xhr, type) {
+                    if (!type.crossDomain) {
+                        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+                    }
+                },
+                success : function(response){
+                    console.log(response.nomeArquivo);
+                    $('#profile_pic').val(response.nomeArquivo);
+                },
+                error:function(data){
+                    console.log("erro de upload "+data)
+                    //alert(data)
+                }
+            })   
          }
 
          function excluirFoto(e){
