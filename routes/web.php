@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CadastroController;
 use App\Http\Controllers\ReceitaController;
+use App\Http\Controllers\ImageController;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,11 @@ Route::post('/cadastro/salvar', [CadastroController::class, 'create'])->name('ca
 Route::post('/cadastro/update/{id}', [CadastroController::class, 'save'])->name('cadastro.atualizar');
 Route::post('/cadastro/excluir/{id}', [CadastroController::class, 'excluir'])->name('cadastro.excluir');
 //Fim Rotas Classe Cadastro
+
+//rotas para imagem
+Route::get('/imagem/{imagem}', [ImageController::class, 'getImages'])->name('imagem.get');
+Route::post('/store', [ImageController::class, 'store'])->name('imagem.store');
+Route::post('/imagem/excluir', [ImageController::class, 'excluir'])->name('imagem.excluir');
 
 //Inicio Rotas Classe Cadastro
 Route::get('/receitas/listar', [ReceitaController::class, 'index'])->name('receitas.listar');
