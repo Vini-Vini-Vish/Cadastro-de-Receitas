@@ -16759,3 +16759,46 @@ be a descendant of the grid when it is being dragged.
   border: 3px dashed rgba(0, 0, 0, .3);
   color: #7e7e7e;
 }
+
+#clickHereLeft {
+  margin-left: 10%;
+  cursor: pointer;
+  color: white;
+  font-size: 17px;
+  width: 100px;
+  height: 45px;
+  border-radius: 4px;
+  background-color: #4679bd;
+  padding-top: 10px;
+}
+
+#clickHereRight {
+  margin-left: 10%;
+  cursor: pointer;
+  color: white;
+  font-size: 17px;
+  width: 100px;
+  height: 45px;
+  border-radius: 4px;
+  background-color: #ff0000;
+  padding-top: 10px;
+}
+
+#filename {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.5em;
+}
+
+.file-preview{
+  background: #ccc;
+  border: 5px solid #fff;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  font-size: 14px;
+  margin-top: 5px;
+}
