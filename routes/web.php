@@ -34,6 +34,7 @@ Route::post('/cadastro/excluir/{id}', [CadastroController::class, 'excluir'])->n
 
 //rotas para imagem
 Route::get('/imagem/{imagem}', [ImageController::class, 'getImages'])->name('imagem.get');
+Route::post('/thumbnail/{imagem}', [ImageController::class, 'getThumbnailore'])->name('thumbnail.get');
 Route::post('/store', [ImageController::class, 'store'])->name('imagem.store');
 Route::post('/imagem/excluir', [ImageController::class, 'excluir'])->name('imagem.excluir');
 
