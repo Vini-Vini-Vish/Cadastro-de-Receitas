@@ -36,7 +36,11 @@
                             @foreach ($registros as $registro)
                                 <tr>
                                     <td>
-                                        <img scr = "{{url('/imagem',  $registro->profile_pic) }}" />
+                                        @if (isset($registro->profile_pic))
+                                            <img src="{{ url('/thumbnail', $registro->profile_pic) }}" class="img-avatar" />
+                                        @else
+                                            <img src="{{ url('/thumbnail', 'boy.png') }}" class="img-avatar" />
+                                        @endif 
                                     </td>
                                     <td>{{ $registro->id    }}</td>
                                     <td>{{ $registro->nome  }}</td>
@@ -52,8 +56,15 @@
                         
                     </table>
 
-                    <a class="btn btn-success btn-lg" href="{{ url('cadastro/incluir')}}"><i class="fa fa-plus-circle"></i></a>
+                    @if (@isset($filters)){
+                        {{ $registros->appends($filters)->links() }}
+                        }
+                    @else
+                        {{ $registros->links() }}
 
+                    @endisset
+
+                   <a class="btn btn-sucess btn-lg" href="{{ url('cadastro/incluir') }}">Incluir<i class="fa fa-plus-circle"></i></a>
                 </div>
             </div>
         </div>
