@@ -5,31 +5,31 @@
                 <div class="form-group">
                     <div id="drop-zone">
                         <div id="fotoBanco">
-                            <input type="hidden" id="profile_pic" name="profile_pic">
-                            @if (isset($registro->profile_pic))
-                                <img scr="{{ url('/imagem', $registro->profile_pic) }}" class="avatar" />
-                            @else
-                                <img id="imageUpload" scr="{{ url('/imagem', 'boy.png') }}" class="avatar" />
-                            @endif
+                            <input type="hidden" id="profile_pic" name="profile_pic"/>
+                            <img id="imageUpload" src="{{ isset($registro->profile_pic) ? 
+                                                  url('/imagem', $registro->profile_pic) :
+                                                  url('/imagem', 'boy.png') }}" class="avatar" />
                         </div>
-                        <div id="clickHereLeft" style="float: left">
-                            <input type="file" accept=".jpg, .jpeg, .png" id="fileInput"
-                                class="form-control hide btn-responsive">
+                        <div id="clickHereLeft" style="float:left;">
                             <div style="text-align: center;">
-                                <label for="fileInput"><i class="fa fa-upload fa-lg"></i></label>
+                                <label for="fileInput"><i class="fa fa-upload fa-lg" ></i></label>
                             </div>
+                            <input type="file" accept=".jpg,.jpeg,.png" id="fileInput"
+                                class="form-control hide btn-responsive">
+        
                         </div>
-                        <div id="clickHereRight" style="float: right">
-                            <input type="button" id="fileExcuir" class="form-control hide btn-responsive">
+                        <div id="clickHereRight" style="float:right;">
                             <div style="text-align: center;">
                                 <label for="fileExcluir"><i class="fa fa-trash fa-lg"></i></label>
                             </div>
+                            <input type="button" id="fileExcluir" class="form-control hide btn-responsive">
+     
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                </div>     
+            </div>    
+        </div>        
+   </div>
 
     <div class="col-xs-4 col-sm-6 col-md-8">
         <div class="row">
