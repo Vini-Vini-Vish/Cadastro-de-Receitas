@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\models\Cadastro;
 use Illuminate\Support\Facades\Storage;
 use Image;
+use App\User;
 
 class ImageController extends Controller
 {
@@ -18,31 +19,33 @@ class ImageController extends Controller
        
         if ($request->hasFile('image')) {
 
-            if ($request->id){
-                $cadastro = Cadastro::find($request->id);
-                $foto = $cadastro->profile_pic;
-                Storage::delete('public/img/normal'.$foto);
-                Storage::delete('public/img/thumbnail'.'_small_'.$foto);
+            if ($request->id) {
+                $usuario = User::find($request->id);
+                $foto = $usuario->profile_pic;
+                if ($foto != 'boy.png') {
+                    Storage::delete('public/img/normal/' . $foto);
+                    Storage::delete('public/img/thumbnail/' . '_small_' . $foto);
+                }
             }
 
             $filenamewithextension = $request->image->getClientOriginalName();
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
             $extension = $request->image->getClientOriginalExtension();
-            $filenamestostore = $filename . '_' . time() . '.' . $extension;
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
             $smallthumbnail = '_small_' . $filename . '_' . time() . '.' . $extension;
 
-            $request->image->storeAs('public/img/normal/', $filenamestostore);
+            $request->image->storeAs('public/img/normal/', $filenametostore);
             $request->image->storeAs('public/img/thumbnail/', $smallthumbnail);
+
             $smallthumbnailpath = public_path('storage/img/thumbnail/' . $smallthumbnail);
 
             $this->createThumbnail($smallthumbnailpath, 150, 93);
 
-            return response()->json(array('nomeArquivo' => $filenamestostore));
-
+            return response()->json(array('nomeArquivo' => $filenametostore));
         } else {
-
-            return response()->json(array('nomeArquivo' => 'arquivo não recebido'));
+            return response()->json(array('nomeArquivo' => 'boy.png'));
         }
+
     }
 
     public function creatThumbnail($path, $width, $height){
@@ -65,6 +68,9 @@ class ImageController extends Controller
     }
 
     public function excluir(Request $request){
-
+        $foto = $request->get('image');
+        Storage::delete('public/img/normal/' . $foto);
+        Storage::delete('public/img/thumbnail/' . '_small_' . $foto);
+        return response()->json(array('nomeArquivo' => 'boy.png'));
     }
 }
