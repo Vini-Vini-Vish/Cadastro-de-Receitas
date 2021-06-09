@@ -16,6 +16,28 @@
         </div>
     </div>
 
+    <div claas="container">
+        <div class="tile">
+            <div class="tile-body">
+                <form class="form-inline" method="POST" action="{{ url('/cadastro/pesquisar') }}">
+                    @csrf
+                    <div class="col-sm-12"> --}}
+                        <div class="form-grup">
+                            <label class="control-label col-sm-1">Pesquisar:</label> <input type="text"
+                                class="form-control col-sm-9" id="nome" name="nome"
+                                placeholder="Digite um nome para pesquisar" value="{{ $filters['nome'] ?? '' }}" />
+                            <div class="col-sm-2"> --}}
+                                <button type="submit" class="btn btn-primary">
+                                    OK <i class="fa fa-search-plus"></i>
+                                </button>
+                            </div> 
+                        </div> 
+                    </div> 
+                </form>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="tile">
             <div class="tile-body">
