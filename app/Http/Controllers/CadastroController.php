@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Cadastro;
 use Illuminate\Http\Request;
+use Illuminate\Cache\Repository;
 use App\Http\Requests\CadastroRequest;
+use Illuminate\Support\Facades\DB;
 
 class CadastroController extends Controller
 {
@@ -17,12 +19,38 @@ class CadastroController extends Controller
         $this->request = $request;
     }
 
-    //retorna a pagina de listagem de usuarios    
     public function index(Request $request)
-    {    
-        $registros = $this->repository->paginate(15);
-        return view('cadastro.index', [
-            'registros' => $registros,
+    {
+        //$this->out->writeln("Hello from Terminal");
+
+        //$registros = $this->repository->paginate();
+
+        //DB::table('usuarios')->paginate();
+
+        $paginaAtual = $request->get('paginaAtual') ? $request->get('paginaAtual') : 1;
+        $pageSize    = $request->get('pageSize') ? $request->get('pageSize') : 5;
+        $dir         = $request->get('dir') ? $request->get('dir') : "asc";
+        $props       = $request->get('props') ? $request->get('props') : "id";
+        $search      = $request->get('search') ? $request->get('search') : "";
+
+        if (empty($search)){
+            $query = DB::table('cadastro')->select('*')->orderBy( $props, $dir);   
+        } else {
+            $query = DB::table('cadastro')->where('nome', 'LIKE','%'.$search.'%')
+                                        //->orWhere('email','LIKE','%'.$search.'%')
+                                        ->orderBy( $props, $dir); 
+        } 
+
+        $total = $query->count();
+
+        $registros = $query->offset(($paginaAtual-1) * $pageSize)->limit($pageSize)->get();
+
+        return response()->json([
+            'data'        =>$registros,
+            'paginaAtual' =>$paginaAtual-1,
+            'pageSize'    =>$pageSize,
+            'paginaFim'   =>ceil($total/$pageSize),
+            'total'       =>$total,
         ]);
     }
 
